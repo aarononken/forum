@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Forum</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<section class="messages">
+	<% if flash[:notice] %>
+		<p class="notice"><%= flash[:notice] %></p>
+	<% end -%>
+
+	<% if flash[:alert] %>
+		<p class="alert"><%= flash[:alert] %></p>
+	<% end -%>
+</section>
+
+<section class="user-actions">
+	<% if current_user %>
+		<span>Greetings, <%= current_user.email %></span> <%= "(Admin)" if current_user.admin? %>
+		 | <%= link_to "Sign Out", sign_out_path %>
+	<% else %>
+		<%= link_to "Sign Up", new_user_path %> | <%= link_to "Sign In", sign_in_path %>
+	<% end %>
+</section>
+
+<%= yield %>
+
+</body>
+</html>

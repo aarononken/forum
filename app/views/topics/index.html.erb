@@ -1,0 +1,17 @@
+<h1>TOPICS</h1>
+
+    <% @topics.each do |topic| %>
+      <div>
+        <%= link_to topic.title, topic %>
+        <ul>
+        <li><% topic.convos.each do |convo| %>
+        <%= link_to convo.title, convo %>
+          added by <%= convo.user.username %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+<br>
+
+<%= link_to 'Add a New Topic', new_topic_path %>

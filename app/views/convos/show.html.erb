@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @convo.user.username %>
+</p>
+
+<p>
+  <strong>Topic:</strong>
+  <%= @convo.topic.title %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @convo.title %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @convo.body %>
+</p>
+
+<section class="comments">
+
+<ul>
+	<% @convo.comments.each do |comment| %>
+  		<li><%= comment.body %> - <%= comment.user.username %> ( <%= comment.created_at %> )
+      <%= link_to '(Delete this comment)', comment, method: :delete, data: { confirm: 'Are you sure?' } if current_user.admin? %>
+		</li>
+	<% end %>
+
+	<%= form_for @convo.comments.build do |form| %>
+	<%= form.hidden_field :convo_id %>
+
+	<div>
+		<%= form.label :body %>
+		<%= form.text_area :body %>
+	</div>
+
+	<div>
+		<%= form.submit %>
+	</div>
+
+	<% end %>
+
+</ul>
+</section>
+
+<%= link_to 'Edit', edit_convo_path(@convo) %> |
+<%= link_to 'Back', convos_path %>

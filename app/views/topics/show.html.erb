@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<h2><%= @topic.title %></h2>
+
+<p>
+  (Created by <%= @topic.user.username %> on <%= @topic.created_at %>.)
+</p>
+
+<ul>
+	<% @topic.convos.each do |convo| %>
+		<li>
+			<%= link_to convo.title, convo %>
+			(Convo begun by <%= convo.user.username %> on <%= convo.created_at %>)
+		</li>
+	<% end -%>
+</ul>
+
+<%= link_to 'Start a New Convo', new_convo_path %> |
+<%= link_to 'Edit', edit_topic_path(@topic) %> |
+<%= link_to 'Back', topics_path %>
